@@ -7,7 +7,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run compile:server",
+    "serve:ssr": "node dist/server.js",
+    "build:client-and-server-bundles": "ng build --prod && ng run angular-server-side-rendering:server:production",
+    "compile:server": "tsc -p server.tsconfig.json",
+    "start-ssr": "npm run build:ssr && npm run serve:ssr"
   },
   "private": true,
   "dependencies": {
@@ -16,11 +21,17 @@
     "@angular/compiler": "~7.1.0",
     "@angular/core": "~7.1.0",
     "@angular/forms": "~7.1.0",
+    "@angular/http": "^7.2.3",
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
+    "@angular/platform-server": "^7.2.3",
     "@angular/router": "~7.1.0",
+    "@nguniversal/express-engine": "^7.1.0",
+    "@nguniversal/module-map-ngfactory-loader": "^7.1.0",
     "core-js": "^2.5.4",
+    "request": "^2.88.0",
     "rxjs": "~6.3.3",
+    "ts-loader": "^5.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
